@@ -1,7 +1,7 @@
 public abstract class Clock {
-    private int hour;
-    private int minute;
-    private int second;
+    protected int hour;
+    protected int minute;
+    protected int second;
 
     public int getHour() {
         return hour;
