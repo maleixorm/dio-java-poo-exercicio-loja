@@ -1,4 +1,4 @@
-public class USClock extends Clock {
+public non-sealed class USClock extends Clock {
     private String periodIndicator;
 
     public String getPeriodIndicator() {
@@ -32,9 +32,21 @@ public class USClock extends Clock {
     }
 
     @Override
-    Clock convert(Clock clock) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'convert'");
+    public Clock convert(Clock clock) {
+        this.second = clock.getSecond();
+        this.minute = clock.getMinute();
+        switch (clock){
+            case USClock usclock -> {
+                this.hour = usclock.getHour();
+                this.periodIndicator = usclock.getPeriodIndicator();
+            }
+            case BRLClock brlClock -> this.setHour(brlClock.getHour());
+        }
+        return this;
     }
-    
+
+    @Override 
+    public String getTime() {
+        return super.getTime() + " " + this.periodIndicator;
+    }
 }
